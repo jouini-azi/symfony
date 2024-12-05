@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome to Booking Service{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h1 class="display-4 mb-4">Welcome to Booking Service</h1>
+            
+            {% if app.user %}
+                <p class="lead">Hello {{ app.user.firstName }} {{ app.user.lastName }}!</p>
+                <div class="mt-4">
+                    <a href="{{ path('app_profile') }}" class="btn btn-primary me-2">View Profile</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('admin_dashboard') }}" class="btn btn-secondary">Admin Dashboard</a>
+                    {% endif %}
+                </div>
+            {% else %}
+                <p class="lead">Please sign in to access our services</p>
+                <div class="mt-4">
+                    <a href="{{ path('app_login') }}" class="btn btn-primary me-2">Sign In</a>
+                    <a href="{{ path('app_register') }}" class="btn btn-outline-primary">Register</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
